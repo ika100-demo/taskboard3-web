@@ -1,7 +1,7 @@
 ---
 spec_id: 001-task-page-at-the-root-url-that-lists
 title: Task page at the root URL that lists tasks and adds a task through the Task API
-status: building
+status: done
 priority: P1
 shape: web-nextjs
 parent: ika100-demo/taskboard3-gitops:001-tasks-in-postgres-seen-and-created-in
@@ -170,3 +170,4 @@ Component and e2e tests stub the API at TASKS_API_URL with the responses of the 
 - 2026-11-05 amended: the three Confirm questions were answered yes; AC-001.1 now states the field labels, the kept header and footer, and that the starter content is removed (same behaviour, stated more precisely); added "Decisions taken during the ship"
 - 2026-11-05 approved
 - 2026-11-05 building
+- 2026-11-06 done
