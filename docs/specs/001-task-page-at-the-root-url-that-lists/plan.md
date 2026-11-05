@@ -17,6 +17,7 @@ tasks:
     covers: [AC-001.3, AC-001.10, AC-001.16]
     parallel_safe: true
     depends_on: []
+    done: true
   - id: t2
     title: POST /api/tasks route handler
     files: [app/api/tasks/route.ts]
