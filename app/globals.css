@@ -208,6 +208,12 @@ main {
   flex: 1;
 }
 
+.lead {
+  max-width: 40rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  color: var(--muted);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -372,4 +378,9 @@ main {
     flex-wrap: wrap;
     padding-block: var(--s-2);
   }
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+  font-weight: 750;
 }
