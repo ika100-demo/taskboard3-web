@@ -13,17 +13,34 @@ function freePort(): string {
 if (!smokeBaseUrl && !process.env.E2E_PORT) process.env.E2E_PORT = process.env.PORT || freePort();
 const port = process.env.E2E_PORT;
 
+// The stub Task API (e2e/support/tasks-api-stub.mjs) gets its own free port, shared with the workers through the environment.
+if (!smokeBaseUrl && !process.env.E2E_TASKS_API_PORT) process.env.E2E_TASKS_API_PORT = freePort();
+const stubPort = process.env.E2E_TASKS_API_PORT;
+const stubUrl = `http://127.0.0.1:${stubPort}`;
+if (!smokeBaseUrl) process.env.E2E_TASKS_API_URL = stubUrl;
+
 export default defineConfig({
   testDir: "./e2e",
   ...(smokeBaseUrl
     ? {}
     : {
-        webServer: {
-          command: `pnpm build && pnpm exec next start --port ${port}`,
-          url: `http://localhost:${port}/api/health`,
-          reuseExistingServer: !process.env.CI,
-          timeout: 120_000,
-        },
+        workers: 1, // the stub has shared state
+        webServer: [
+          {
+            command: "node e2e/support/tasks-api-stub.mjs",
+            url: `${stubUrl}/health`,
+            env: { E2E_TASKS_API_PORT: String(stubPort) },
+            reuseExistingServer: false,
+            timeout: 30_000,
+          },
+          {
+            command: `pnpm build && pnpm exec next start --port ${port}`,
+            url: `http://localhost:${port}/api/health`,
+            env: { TASKS_API_URL: stubUrl },
+            reuseExistingServer: !process.env.CI,
+            timeout: 120_000,
+          },
+        ],
       }),
   use: { baseURL: smokeBaseUrl || `http://localhost:${port}` },
 });
