@@ -24,6 +24,7 @@ tasks:
     covers: [AC-001.9, AC-001.10, AC-001.11, AC-001.12, AC-001.13, AC-001.14, AC-001.15, AC-001.16]
     parallel_safe: true
     depends_on: [t1]
+    done: true
   - id: t3
     title: Task page and TaskBoard client component replace the starter page
     files: [app/page.tsx, app/_components/task-board.tsx, app/_components/feature-card.tsx, app/_components/icons.tsx, app/globals.css, tests/page.test.tsx, e2e/home.spec.ts]
