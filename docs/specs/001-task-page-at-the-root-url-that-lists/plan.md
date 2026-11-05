@@ -10,6 +10,7 @@ tasks:
     covers: [AC-001.2, AC-001.3, AC-001.7, AC-001.8, AC-001.9, AC-001.12, AC-001.13, AC-001.15]
     parallel_safe: true
     depends_on: []
+    done: true
   - id: t4
     title: Stub Task API and Playwright wiring for e2e tests
     files: [e2e/support/tasks-api-stub.mjs, playwright.config.ts]
